@@ -1,0 +1,11 @@
+
+
+./gvecout.py   # Write reciprocal lattice vector G
+
+./outg.py      # Divide reciprocal lattice vector G with respect to cutoff
+
+./cal_feat.py  # Calculate descriptors
+
+~/anaconda3/envs/tf2/bin/python ./potout.py   # Formulate atomic potentials by using optimized model paramters and save it to epp folder
+
+mpirun --machinefile $PBS_NODEFILE ~/code.epm.ml/bin/pw.x -nk 2 < pw.bands.in > pw.bands.out         # Execute QE by reading epp folder
