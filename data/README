@@ -1,0 +1,28 @@
+
+<Workflow>
+
+cd skel            # Directory for initial structures (download from Materials Project database)
+../gennat.py       # estimate number of atoms
+cd ..
+
+./mkdir.py         # Generate supercell
+./gennat.py
+./gendirlist.py    # Write list of supercell
+./do_symm.py       # Write information of number of atoms and index
+edit run.sh        # Script for generating QE input, running QE and postprocessing
+./runall.py ##     # Submit run.sh for all created crystal structures
+
+./gensoapdic.py    # Gather descriptors (dc and SOAP) for all structures
+./mergedata.py     # Gather potentials (v_s or v_l) for all structures
+
+<Note>
+
+In the process of run.sh file,
+
+pwkptgen.py        # Write k-points
+pwposgen.dis.py    # Generate structures by applying lattice distortion and random atomic displacement
+pwingen.py         # Write input parametes and generate QE input file
+code.pp/bin/pp.x   # Extract crystal potential from converged DFT output
+vd2vd.py           # Divide crystal potential with respect to reciprocal lattice vector G
+pw2pos.py          # Convert QE input into POSCAR file
+cal_feat.py        # Calculate descriptors
